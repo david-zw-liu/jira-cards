@@ -3,13 +3,35 @@ import styled from 'styled-components';
 
 const CardContainer = styled.div`
   position: relative;
-  margin-bottom: 1cm;
-  height: calc(50vh - 1cm);
+  margin-bottom: 40px;
+  height: calc(50vh - 40px);
   box-sizing: border-box;
   flex: 0 0 50%;
-  border-left: 0.3cm solid black;
+  border-left: 12px solid black;
   padding: 0 16px;
   
+  &:nth-child(4n), &:nth-child(4n+2) {
+    &:before {
+      content: "";
+      position: absolute;
+      height: calc(100% + 34px);
+      top: -20px;
+      right: 8px;
+      border-right: 2px dashed #000;
+    }
+  }
+
+  &:nth-child(4n+2), &:nth-child(4n+3) {
+    &:after {
+      content: "";
+      position: absolute;
+      width: calc(100% + 4px);
+      bottom: -20px;
+      left: -12px;
+      border-bottom: 2px dashed #000;
+    }
+  }
+
   h3 {
     font-size: 18px;
     font-weight: normal;
