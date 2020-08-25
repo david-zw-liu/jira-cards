@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import parser from 'fast-xml-parser';
 import he from 'he';
@@ -15,36 +15,67 @@ const Container = styled.div`
     width: 100%;
     margin-bottom: 30px;
     
-    @media print {    
+    @media print {
       display: none !important;
     }
+  }
+
+  .no-print {
+    display: block;
+
+    @media print {
+      display: none !important;
+    }
+  }
+
+  .print {
+    display: none;
+
+    @media print {
+      display: block !important;
+    }
+  }
 `;
 
 function App() {
   const [xml, setXml] = useState('');
-  let cardInfos = [];
-  try {
-    const { rss } = parser.parse(xml, {
-      attrValueProcessor: (val, attrName) => he.decode(val, {isAttributeValue: true}),
-      tagValueProcessor : (val, tagName) => he.decode(val),
-    });
-    const items = rss?.channel?.item || [];
-    cardInfos = items.map(item => {
-      const customFields = item.customfields?.customfield || [];
-      const storyPointsField = customFields.find(f => f.customfieldname === 'Story point estimate');
-      const storyPoints = storyPointsField?.customfieldvalues?.customfieldvalue;
-      const title = (item?.title || '').toString().match(/(\[.*\] )*(.+)/)?.[2];
+  const [tmpCard, setTmpCard] = useState([]);
 
-      return {
-        title,
-        storyPoints,
-        taskId: item.key,
-        assignee: item.assignee,
-      };
-    });
-  } catch (e) {
-    console.error(e);
-  }
+  useEffect(() => {
+    try {
+      const { rss } = parser.parse(xml, {
+        attrValueProcessor: (val, attrName) => he.decode(val, {isAttributeValue: true}),
+        tagValueProcessor : (val, tagName) => he.decode(val),
+      });
+      const items = rss?.channel?.item || [];
+      setTmpCard(items.map(item => {
+        const customFields = item.customfields?.customfield || [];
+        const storyPointsField = customFields.find(f => f.customfieldname === 'Story point estimate');
+        const storyPoints = storyPointsField?.customfieldvalues?.customfieldvalue;
+        const title = (item?.title || '').toString().match(/(\[.*\] )*(.+)/)?.[2];
+  
+        return {
+          title,
+          storyPoints,
+          taskId: item.key,
+          assignee: item.assignee,
+          checked: true,
+        };
+      }));
+    } catch (e) {
+      console.error(e);
+    }
+  }, [xml]);
+
+  const handleCheck = (taskId) => {
+    setTmpCard((prevTmpCard) => (
+      prevTmpCard.map((cardInfo) => {
+        return cardInfo.taskId !== taskId
+          ? cardInfo
+          : { ...cardInfo, checked: !cardInfo.checked };
+      })
+    ));
+  };
 
   return (
     <Container>
@@ -56,8 +87,24 @@ function App() {
         value={xml}
         onChange={(e) => setXml(e.currentTarget.value)}
       />
-
-      {cardInfos.map(cardInfo => (<Card key={cardInfo.taskId} {...cardInfo}/>))}
+      <Container>
+        {tmpCard.map(cardInfo => (
+          <Card
+            key={cardInfo.taskId}
+            handleCheck={handleCheck}
+            className="no-print"
+            {...cardInfo}
+          />))}
+      </Container>
+      <Container>
+        {tmpCard.filter(({ checked }) => checked).map(cardInfo => (
+          <Card
+            key={cardInfo.taskId}
+            handleCheck={handleCheck}
+            className="print"
+            {...cardInfo}
+          />))}
+      </Container>
     </Container>
   );
 }
