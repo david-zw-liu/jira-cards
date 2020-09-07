@@ -9,6 +9,7 @@ const CardContainer = styled.div`
   flex: 0 0 50%;
   border-left: 12px solid black;
   padding: 0 16px;
+  cursor: pointer;
   
   &:nth-child(4n), &:nth-child(4n+2) {
     &:before {
@@ -50,10 +51,10 @@ const CardContainer = styled.div`
 `
 
 const Card = (props) => {
-  const { title, taskId, storyPoints, assignee } = props;
+  const { title, taskId, storyPoints, assignee, onClick } = props;
 
   return (
-    <CardContainer className="card">
+    <CardContainer className="card" onClick={onClick}>
       <h3>{taskId}</h3>
       <h2>({storyPoints || ' '}) {title}</h2>
 
