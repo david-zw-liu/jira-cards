@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/jira-cards/static/css/main.5ecd60fb.chunk.css",
-    "main.js": "/jira-cards/static/js/main.feaba83c.chunk.js",
-    "main.js.map": "/jira-cards/static/js/main.feaba83c.chunk.js.map",
+    "main.js": "/jira-cards/static/js/main.1ebb54c0.chunk.js",
+    "main.js.map": "/jira-cards/static/js/main.1ebb54c0.chunk.js.map",
     "runtime-main.js": "/jira-cards/static/js/runtime-main.2a89af7b.js",
     "runtime-main.js.map": "/jira-cards/static/js/runtime-main.2a89af7b.js.map",
-    "static/js/2.05899b36.chunk.js": "/jira-cards/static/js/2.05899b36.chunk.js",
-    "static/js/2.05899b36.chunk.js.map": "/jira-cards/static/js/2.05899b36.chunk.js.map",
+    "static/js/2.60bcecea.chunk.js": "/jira-cards/static/js/2.60bcecea.chunk.js",
+    "static/js/2.60bcecea.chunk.js.map": "/jira-cards/static/js/2.60bcecea.chunk.js.map",
     "index.html": "/jira-cards/index.html",
-    "precache-manifest.d0caea39c0a24d7359b8388d555034b5.js": "/jira-cards/precache-manifest.d0caea39c0a24d7359b8388d555034b5.js",
+    "precache-manifest.4a260eb5b6fc1b5a88424986f4f0cc8e.js": "/jira-cards/precache-manifest.4a260eb5b6fc1b5a88424986f4f0cc8e.js",
     "service-worker.js": "/jira-cards/service-worker.js",
     "static/css/main.5ecd60fb.chunk.css.map": "/jira-cards/static/css/main.5ecd60fb.chunk.css.map",
-    "static/js/2.05899b36.chunk.js.LICENSE.txt": "/jira-cards/static/js/2.05899b36.chunk.js.LICENSE.txt"
+    "static/js/2.60bcecea.chunk.js.LICENSE.txt": "/jira-cards/static/js/2.60bcecea.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.2a89af7b.js",
-    "static/js/2.05899b36.chunk.js",
+    "static/js/2.60bcecea.chunk.js",
     "static/css/main.5ecd60fb.chunk.css",
-    "static/js/main.feaba83c.chunk.js"
+    "static/js/main.1ebb54c0.chunk.js"
   ]
 }
